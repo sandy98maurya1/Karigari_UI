@@ -1,3 +1,5 @@
+using Karigari.Integrations.Domains.User;
+using Karigari.Integrations.Storage.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,9 @@ namespace KarigariUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IUserDomain, UserDomain>();
+            services.AddScoped<IUserProvider, UserProvider>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

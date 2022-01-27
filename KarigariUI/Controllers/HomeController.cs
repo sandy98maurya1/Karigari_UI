@@ -1,4 +1,4 @@
-﻿using KarigariUI.Models;
+﻿using Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,11 +19,6 @@ namespace KarigariUI.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
