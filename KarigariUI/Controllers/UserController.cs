@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using System;
 
 namespace KarigariUI.Controllers
 {
@@ -40,6 +41,7 @@ namespace KarigariUI.Controllers
         {
             try
             {
+                GetFormData(collection);
                // _userDomain.AddUser(user);
                 return RedirectToAction(nameof(Index));
             }
@@ -48,6 +50,8 @@ namespace KarigariUI.Controllers
                 return View();
             }
         }
+
+        
 
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
@@ -71,6 +75,13 @@ namespace KarigariUI.Controllers
             }
         }
 
-       
+
+
+        private Users GetFormData(IFormCollection collection)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

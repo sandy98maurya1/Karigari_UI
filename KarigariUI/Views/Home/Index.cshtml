@@ -12,17 +12,10 @@
                     <h2 class="text-uppercase text-center mb-5">Please Select your Profile</h2>
                     <div id="container">
                         <!-- flex container -->
-
-                        <div id="Factory" onclick="@Html.ActionLink("Create New", "Create")" class="box" id="bluebox">
-
-                            <!-- flex item -->
-                            <img  src="images/Factory.jpg" alt="Snow" style="width:100%;border-radius: 10px;">
-                        </div>
-
-                        <div class="box" id="redbox">
-                            <!-- flex item -->
-                            <img src="images/worker2.jpg" alt="Snow" style="width:100%;border-radius: 10px;">
-                        </div>
+                         <div class="box"  id="Factory" style="border: 2px solid #000;border-radius: 10px;">
+                         <img  src="images/Factory_n.jpg" alt="Snow" style="width:100%;border-radius: 6px;"></div>
+                         <div class="box" id="Labour" style="border: 2px solid #000;border-radius: 10px;">
+                         <img src="images/worker2.jpg" alt="Snow" style="width:100%;border-radius: 10px;"></div>
                     </div>
                 </div>
             </div>
@@ -50,7 +43,7 @@
      $('#exampleModalCenter').modal({
             backdrop: 'static'
         });
-      $("#Factory").click(function() {
+      $("#Labour").click(function() {
          window.location.href = '/User/Create';
     });
     });

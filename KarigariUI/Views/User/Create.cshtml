@@ -20,10 +20,6 @@
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="input-group mb-3">
                                 </div>
-                               @* <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Id" id="Id" name="Id">
-                                    <span asp-validation-for="Id" class="text-danger"></span>
-                                </div>*@
                                 <div class="form-group input-group mb-3">
                                     <input type="text" class="form-control" placeholder="FirstName" id="FirstName" name="FirstName">
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -36,70 +32,34 @@
                                     <input type="text" class="form-control" placeholder="Contact details " id="Contact" name="Contact">
                                     <span asp-validation-for="Contact" class="text-danger"></span>
                                 </div>
-                                @*<div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Alternet Contact details " id="AlternetContact" name="AlternetContact">
-                                    <span asp-validation-for="AlternetContact" class="text-danger"></span>
-                                </div>*@
-                           @*     <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="MaritalStatus" id="MaritalStatus" name="MaritalStatus">
-                                    <span asp-validation-for="MaritalStatus" class="text-danger"></span>
-                                </div>*@
+
+                                <select class="form-select input-group mb-3" aria-label="Default select example">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                                 <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Gender" id="Gender" name="Gender">
-                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                    <input class="form-control" placeholder="Select Birth Date" type="text" id="DateOfBirth" name="DateOfBirth" />
                                 </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="DateOfBirth" id="DateOfBirth" name="DateOfBirth">
-                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                <div class="form-group ">
+                                    <select class="form-select input-group mb-3" aria-label="Default WorkerType example">
+                                        <option value="Mistris">Mistri</option>
+                                        <option value="Labours">Labour</option>
+                                    </select> <span asp-validation-for="WorkerType" class="text-danger"></span>
                                 </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Worker Type" id="WorkerType" name="WorkerType">
-                                    <span asp-validation-for="WorkerType" class="text-danger"></span>
-                                </div>
-                             @*   <div class="  mb-3 form-group form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                                    </label>
-                                </div>*@
                                 <div class="form-group input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Password " id="Password" name="Password">
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-                            @*    <div class="mb-3 form-group form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" asp-for="IsMobileVerified" /> @Html.DisplayNameFor(model => model.IsMobileVerified)
-                                    </label>
-                                </div>*@
-                               @* <div class="input-group mb-3">
-
-                                    <input type="text" class="form-control" placeholder="DeviceID" id="DeviceID" name="DeviceID">
-                                    <span asp-validation-for="DeviceID" class="text-danger"></span>
-                                </div>*@
-                               @* <div class="mb-3 form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" asp-for="Enabled" /> @Html.DisplayNameFor(model => model.Enabled)
-                                    </label>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" asp-for="IsSuccess" /> @Html.DisplayNameFor(model => model.IsSuccess)
-                                    </label>
-                                </div>*@
                                 <div class="form-group input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Address" id="Message" name="Message">
                                     <span asp-validation-for="Message" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <input type="submit" value="user/Create" class="btn btn-primary" />
-                                     <button id="Button" type="submit" name="submit" formmethod="post" class="btn btn-secondary btn-sm">Savasdasdsade</button>
-          
+                                <div class="form-group mb-3" style="display: flex; justify-content: center;">
+                                    <button id="Button" type="submit" name="submit" formmethod="post" class="btn btn-primary">Create User</button>
                                 </div>
-                                 <button id="Button" type="submit" name="submit" formmethod="post" class="btn btn-secondary btn-sm">save</button>
-          
                             </form>
                         </div>
                     </div>
-                   
                 </div>
             </div>
         </div>
@@ -110,14 +70,23 @@
         margin-left: 20%;
     }
 </style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script>
+    $(function() {
+      $('body').on('focus',"#DateOfBirth", function(){
+            $(this).datepicker({ dateFormat: 'dd-mm-yy' });
+      });
+    });
+</script>
 <script type="text/javascript">
-$(document).ready(function(){
-    if(window.matchMedia("(max-width: 767px)").matches){
-        // The viewport is less than 768 pixels wide
-       $('.mb-3').css(' margin-left','');
-    } else{
-        // The viewport is at least 768 pixels wide
-        $('.mb-3').css(' margin-left','20%');
-    }
-});
+
+    $(document).ready(function(){
+        if(window.matchMedia("(max-width: 767px)").matches){
+            // The viewport is less than 768 pixels wide
+           $('.mb-3').css(' margin-left','');
+        } else{
+            // The viewport is at least 768 pixels wide
+            $('.mb-3').css(' margin-left','20%');
+        }
+    });
 </script>
