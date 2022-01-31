@@ -12,8 +12,19 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;margin-top: 20%;">
+                    <div class="row ml-4 mt-3">
+                        <div class="col-sm-8">
+                            <h2>Sign Up</h2>
+                        </div>
+                    </div>
 
-
+                    <div class="row ml-4 mt-3">
+                        <div class="col-sm-8">
+                          <p>Please fill in this form to create an account!</p>
+                        </div>
+                    </div>
+                   
+                  <hr>
                     <div class="row">
                         <div class="col-md-9">
                             <form asp-action="Create">
@@ -51,7 +62,7 @@
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                                 <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" data-toggle="modal" data-target="#exampleModal" placeholder="Address" id="Message" name="Message">
+                                    <input type="text" class="form-control" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false" placeholder="Address" id="Address" name="Message" readonly>
                                     <span asp-validation-for="Message" class="text-danger"></span>
                                 </div>
                                 <div class="form-group mb-3" style="display: flex; justify-content: center;">
@@ -65,104 +76,110 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog"  style="margin-top: 6%;" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Address Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <fieldset>
-                        <!-- Address form -->
-
-                        <h2>Address</h2>
-
-                        <!-- country select -->
-                        <div class="control-group">
-
+                    <div class="row mt-3">
+                        <div class="col-sm-2">
+                            <label class="control-label float-right">Country</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <!-- country select -->
                             <div class="control-group">
-                                <label class="control-label">Country</label>
                                 <div class="controls">
-                                    <select id="country" name="country" class="input-xlarge">
-                                        <option value="" selected="selected">(please select a country)</option>
+                                    <select id="country" name="country" class="input-xlarge w-100">
+                                        <option value="" selected="selected">Select a Country</option>
                                         <option value="IN">India</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- State select -->
-                        <div class="control-group">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-2">
+                            <label class="control-label float-right">State</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <!-- State select -->
                             <div class="control-group">
-                                <label class="control-label">State</label>
                                 <div class="controls">
-                                    <select id="State" name="State" class="input-xlarge">
-                                        <option value="" selected="selected">(please select a state)</option>
-                                        <option value="IN">India</option>
+                                    <select id="State" name="State" class="input-xlarge w-100">
+                                        <option value="" selected="selected">Select a State</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-
-
-                        <!-- city select -->
-                        <div class="control-group">
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-2">
+                            <label class="control-label float-right">City</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <!-- city select -->
                             <div class="control-group">
-                                <label class="control-label">City</label>
                                 <div class="controls">
-                                    <select id="city" name="city" class="input-xlarge">
-                                        <option value="" selected="selected">(please select a City)</option>
-                                        <option value="IN">India</option>
+                                    <select id="city" name="city" class="input-xlarge w-100">
+                                        <option value="" selected="selected">Select a City</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Taluka select -->
-                        <div class="form-group">
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-2">
+                            <label class="control-label float-right">Taluka</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <!-- Taluka select -->
                             <div class="form-group">
-                                <label class="control-label">Taluka</label>
                                 <div class="controls">
-                                    <select id="taluka" name="taluka" class="input-xlarge">
-                                        <option value="" selected="selected">(please select a taluka)</option>
-                                        <option value="IN">India</option>
+                                    <select id="taluka" name="taluka" class="input-xlarge w-100">
+                                        <option value="" selected="selected"> Select a Taluka</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <!-- Taluka - input-->
-                        <div class="form-group">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-2">
+                            <label class="control-label float-right" style="margin-left: 15px;">Land Mark:</label>
+                        </div>
+                        <div class="col-sm-8">
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Taluka:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control w-100" id="message-text"></textarea>
                                 <p class="help-block">Street address, P.O. box, company name, c/o</p>
                             </div>
                         </div>
-
-                        <!-- postal-code input-->
-                        <div class="control-group">
-                            <label class="control-label">Zip / Postal Code</label>
-                            <div class="controls">
-                                <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code" class="input-xlarge">
-                                <p class="help-block"></p>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-2">
+                            <label class="control-label float-right" style="margin-left: 15px;"> Zip / Postal Code</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <!-- postal-code input-->
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code" class="w-100 input-xlarge">
+                                    <p class="help-block"></p>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                    </fieldset>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+            <div class="modal-footer" style="justify-content: center;">
+                <button type="button"  id="saveAddress" class="btn btn-primary">Save Address</button>
             </div>
         </div>
     </div>
@@ -173,7 +190,7 @@
     }
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<script>
+<script type="text/javascript">
 
          $(document).ready (function (){
              $(".dropdown-toggle").dropdown();
@@ -197,13 +214,37 @@
 </script>
 <script type="text/javascript">
 
-    $(document).ready(function(){
-        if(window.matchMedia("(max-width: 767px)").matches){
-            // The viewport is less than 768 pixels wide
-           $('.mb-3').css(' margin-left','');
-        } else{
-            // The viewport is at least 768 pixels wide
-            $('.mb-3').css(' margin-left','20%');
-        }
+     $(document).ready(function(){
+         if(window.matchMedia("(max-width: 767px)").matches){
+             // The viewport is less than 768 pixels wide
+            $('.mb-3').css(' margin-left','');
+         } else{
+             // The viewport is at least 768 pixels wide
+             $('.mb-3').css(' margin-left','20%');
+         }
+
+         $('#saveAddress').click(function(){
+
+
+
+    alert('');
+
+         });
+
+
+
+
+     });
+</script>
+
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+     $('#exampleModalCenter').modal({
+            backdrop: 'static'
+        });
+      $("#Labour").click(function() {
+         window.location.href = '/User/Create';
+    });
     });
 </script>
