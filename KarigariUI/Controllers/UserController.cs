@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
 
+
 namespace KarigariUI.Controllers
 {
     public class UserController : Controller
@@ -42,7 +43,7 @@ namespace KarigariUI.Controllers
             try
             {
                 GetFormData(collection);
-               // _userDomain.AddUser(user);
+                // _userDomain.AddUser(user);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -50,9 +51,6 @@ namespace KarigariUI.Controllers
                 return View();
             }
         }
-
-        
-
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -77,11 +75,31 @@ namespace KarigariUI.Controllers
 
 
 
+
         private Users GetFormData(IFormCollection collection)
         {
             throw new NotImplementedException();
         }
 
 
+        [HttpPost]
+        public JsonResult GetStateDetails(int countryId)
+        {
+            var state = _userDomain.GetStateDetails(2);
+            return Json(new { data = state });
+        }
+        [HttpPost]
+        public JsonResult GetDivisionDetails(int stateId)
+        {
+            var division = _userDomain.GetDivisionDetails(stateId);
+            return Json(new { data = division });
+        }
+        [HttpPost]
+        public JsonResult GetTalukaDetails(int divisionId)
+        {
+            var taluka = _userDomain.GetTalukaDetails(divisionId);
+            return Json(new { data = taluka });
+
+        }
     }
 }

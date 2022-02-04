@@ -14,5 +14,8 @@ namespace Karigari.Integrations.Storage.User
         IList<Users> GetAllUser();
         Users GetUserById(int userId);
         Users GetUserByName(string name);
+        IList<StateDetails> GetStateDetails(int countryId);
+        IList<DivisionDetails> GetDivisionDetails(int stateId);
+        IList<TalukaDetails> GetTalukaDetails(int divisionId);
     }
 }

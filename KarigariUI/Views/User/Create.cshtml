@@ -3,10 +3,6 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-
-
-
 <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -156,7 +152,7 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="form-group">
-                                <textarea class="form-control w-100" id="message-text"></textarea>
+                                <textarea class="form-control w-100" id="landMark"></textarea>
                                 <p class="help-block">Street address, P.O. box, company name, c/o</p>
                             </div>
                         </div>
@@ -190,61 +186,4 @@
     }
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<script type="text/javascript">
-
-         $(document).ready (function (){
-             $(".dropdown-toggle").dropdown();
-         $('.dropdown-menu').on( 'click', 'a', function() {
-        var text = $(this).html();
-        var htmlText = text + ' <span class="caret"></span>';
-        $(this).closest('.dropdown').find('.dropdown-toggle').html(htmlText);
-    });
-
-         });
-
-
-
-
-
-        $(function() {
-          $('body').on('focus',"#DateOfBirth", function(){
-                $(this).datepicker({ dateFormat: 'dd-mm-yy' });
-          });
-        });
-</script>
-<script type="text/javascript">
-
-     $(document).ready(function(){
-         if(window.matchMedia("(max-width: 767px)").matches){
-             // The viewport is less than 768 pixels wide
-            $('.mb-3').css(' margin-left','');
-         } else{
-             // The viewport is at least 768 pixels wide
-             $('.mb-3').css(' margin-left','20%');
-         }
-
-         $('#saveAddress').click(function(){
-
-
-
-    alert('');
-
-         });
-
-
-
-
-     });
-</script>
-
-
-<script type="text/javascript">
-    $(window).on('load', function() {
-     $('#exampleModalCenter').modal({
-            backdrop: 'static'
-        });
-      $("#Labour").click(function() {
-         window.location.href = '/User/Create';
-    });
-    });
-</script>
+   <script src="~/js/user/CreateUser.js" asp-append-version="true"></script>

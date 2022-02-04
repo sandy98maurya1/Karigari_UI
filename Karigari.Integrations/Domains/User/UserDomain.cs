@@ -17,32 +17,48 @@ namespace Karigari.Integrations.Domains.User
 
         public bool AddUser(Users user)
         {
-         return   _provider.AddUser(user);
+            return _provider.AddUser(user);
         }
 
         public bool DisableUser(int userId)
         {
-           return _provider.DisableUser(userId);
+            return _provider.DisableUser(userId);
         }
 
         public IList<Users> GetAllUser()
         {
-          return  _provider.GetAllUser();
+            return _provider.GetAllUser();
         }
 
         public Users GetUserById(int userId)
         {
-          return  _provider.GetUserById(userId);
+            return _provider.GetUserById(userId);
         }
 
         public Users GetUserByName(string name)
         {
-          return  _provider.GetUserByName(name);
+            return _provider.GetUserByName(name);
         }
 
         public bool UpdateUser(Users user, int id)
         {
-         return  _provider.UpdateUser(user, id); 
+            return _provider.UpdateUser(user, id);
+        }
+
+        public IList<DivisionDetails> GetDivisionDetails(int stateId)
+        {
+            return _provider.GetDivisionDetails(stateId);
+        }
+
+        public IList<StateDetails> GetStateDetails(int countryId)
+        {
+            return _provider.GetStateDetails(countryId);
+        }
+
+        public IList<TalukaDetails> GetTalukaDetails(int divisionId)
+        {
+            return _provider.GetTalukaDetails(divisionId);
+
         }
     }
 }
