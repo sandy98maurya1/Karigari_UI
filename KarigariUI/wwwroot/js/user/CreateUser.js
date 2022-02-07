@@ -32,15 +32,28 @@ $(document).ready(function () {
 //for address popup
 $(function () {
     $('#country').on("change", function () {
+
+        if ($(this).val().length == 0) {
+            $('#State').prop("disabled", true);
+            $('#city').prop("disabled", true);
+            $('#taluka').prop("disabled", true);
+            $('#State').html('').append('<option value="">Select a State</option>');
+            $('#city').html('').append('<option value="">Select a City</option>');
+            $('#taluka').html('').append('<option value="">Select a Taluka</option>');
+            return false;
+        }
         $.post('/User/GetStateDetails', { countryId: parseInt($('#country').val()) }, function (response) {
             if (response.data.length > 0) {
                 $('#State').html('');
                 var options = '';
-                options += '<option value="Select">Select</option>';
+                options += '<option value="">Select a State</option>';
                 for (var i = 0; i < response.data.length; i++) {
                     options += '<option value="' + response.data[i].stateId + '">' + response.data[i].name + '</option>';
                 }
                 $('#State').append(options);
+                $('#State').prop("disabled", false);
+                $('#city').prop("disabled", true);
+                $('#taluka').prop("disabled", true);
 
             }
         }).fail(function (error) {
@@ -50,16 +63,25 @@ $(function () {
     });
 
     $('#State').on("change", function () {
+        if ($(this).val().length == 0) {
 
+            $('#city').prop("disabled", true);
+            $('#taluka').prop("disabled", true);
+            $('#city').html('').append('<option value="">Select a City</option>');
+            $('#taluka').html('').append('<option value="">Select a Taluka</option>');
+            return false;
+        }
         $.post('/User/GetDivisionDetails', { stateId: parseInt($('#State').val()) }, function (response) {
             if (response.data.length > 0) {
                 $('#city').html('');
                 var options = '';
-                options += '<option value="Select">Select</option>';
+                options += '<option value="">Select a City</option>';
                 for (var i = 0; i < response.data.length; i++) {
                     options += '<option value="' + response.data[i].divisionId + '">' + response.data[i].name + '</option>';
                 }
                 $('#city').append(options);
+                $('#city').prop("disabled", false);
+                $('#taluka').prop("disabled", true);
 
             }
         }).fail(function (error) {
@@ -68,15 +90,21 @@ $(function () {
     });
 
     $('#city').on("change", function () {
+        if ($(this).val().length == 0) {
+            $('#taluka').prop("disabled", true);
+            $('#taluka').html('').append('<option value="">Select a Taluka</option>');
+            return false;
+        }
         $.post('/User/GetTalukaDetails', { divisionId: parseInt($('#city').val()) }, function (response) {
             if (response.data.length > 0) {
                 $('#taluka').html('');
                 var options = '';
-                options += '<option value="Select">Select</option>';
+                options += '<option value="">Select a Taluka</option>';
                 for (var i = 0; i < response.data.length; i++) {
                     options += '<option value="' + response.data[i].TalukaId + '">' + response.data[i].name + '</option>';
                 }
                 $('#taluka').append(options);
+                $('#taluka').prop("disabled", false);
 
             }
         }).fail(function (error) {
@@ -110,5 +138,36 @@ $('#saveAddress').click(function () {
 
 });
 
+$('#CreateUser').click(function () {
 
+    if ($('#FirstName').val().length == 0) {
+        alert('please enter First Name');
+        return false;
 
+    }
+    else if ($('#LastName').val().length == 0) {
+        alert('please enter Last Name');
+        return false;
+
+    }
+    else if ($('#Contact').val().length == 0) {
+        alert('please enter Phone Numbar');
+        return false;
+
+    }
+    else if ($('#DateOfBirth').val().length == 0) {
+        alert('please select Date Of Birth');
+        return false;
+
+    }
+    else if ($('#Password').val().length == 0) {
+        alert('please enter Password');
+        return false;
+
+    }
+    else if ($('#Address').val().length == 0) {
+        alert('please enter Address');
+        return false;
+    }
+
+});

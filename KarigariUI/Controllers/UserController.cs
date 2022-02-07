@@ -24,7 +24,7 @@ namespace KarigariUI.Controllers
         // GET: UserController/Details/5
         public ActionResult Details(int id)
         {
-
+            var ss = _userDomain.GetAllUser();
             return View(_userDomain.GetUserById(id));
         }
 
@@ -42,9 +42,9 @@ namespace KarigariUI.Controllers
         {
             try
             {
-                GetFormData(collection);
+                //GetFormData(collection);
                 // _userDomain.AddUser(user);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             catch
             {
@@ -78,8 +78,14 @@ namespace KarigariUI.Controllers
 
         private Users GetFormData(IFormCollection collection)
         {
-            throw new NotImplementedException();
+
+            var users = new Users() { DeviceID = 222 };
+            return users;
         }
+
+
+
+
 
 
         [HttpPost]

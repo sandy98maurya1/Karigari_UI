@@ -2,6 +2,7 @@
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace Karigari.Integrations.Storage.User
@@ -17,152 +18,54 @@ namespace Karigari.Integrations.Storage.User
         }
         public bool AddUser(Users user)
         {
-            return true;
+            var usersDeatils = ConsumeApiService.ConsumeApi<ApiResponse<bool>>(HttpMethod.Post, "/AddUser", user);
+            return usersDeatils.Data;
         }
-
         public bool DisableUser(int userId)
         {
-            return true;
+            var usersDeatils = ConsumeApiService.ConsumeApi<ApiResponse<bool>>(HttpMethod.Post, "/DeleteUser?userId=" + userId, null);
+            return usersDeatils.Data;
         }
-
         public IList<Users> GetAllUser()
         {
-            IList<Users> users = new List<Users>();
-            users.Add(new Users()
-            {
-                Address = new Address()
-                {
-                    City = "Pune",
-                    Country = "India",
-                    State = "Maharashtra",
-                    Taluka = "Dhanori",
-                    Village = "Dhanori Gaon",
-                    Zip = "222132"
-                },
-                FirstName = "Amit ",
-                LastName = "Malviya",
-                Id = 23,
-                AlternetContact = "352424252363",
-                Contact = "32645237452374",
-                Enabled = false,
-                Gender = "Female"
-            });
-            users.Add(new Users()
-            {
-                Address = new Address()
-                {
-                    City = "Pune",
-                    Country = "India",
-                    State = "Maharashtra",
-                    Taluka = "Dhanori",
-                    Village = "Dhanori Gaon",
-                    Zip = "222132"
-                },
-                FirstName = "Mahadev ",
-                LastName = "sharma",
-                Id = 23,
-                AlternetContact = "352424252363",
-                Contact = "32645237452374",
-                Enabled = false,
-                Gender = "Female"
-            });
-            return users;
+            var usersDeatils = ConsumeApiService.ConsumeApi<ApiResponse<List<Users>>>(HttpMethod.Get, "/GetUsers", null);
+            return usersDeatils.Data;
         }
-
         public Users GetUserById(int userId)
         {
-            Users user = new Users()
-            {
-
-                Address = new Address()
-                {
-                    City = "Pune",
-                    Country = "India",
-                    State = "Maharashtra",
-                    Taluka = "Dhanori",
-                    Village = "Dhanori Gaon",
-                    Zip = "222132"
-                },
-                FirstName = "Mahadev ",
-                LastName = "sharma",
-                Id = 23,
-                AlternetContact = "352424252363",
-                Contact = "32645237452374",
-                Enabled = false,
-                Gender = "Female"
-            };
-            return user;
+            var usersDeatils = ConsumeApiService.ConsumeApi<ApiResponse<Users>>(HttpMethod.Get, "/GetUsersById?id=" + userId, null);
+            return usersDeatils.Data;
         }
-
-
         public Users GetUserByName(string name)
         {
-            Users user = new Users()
-            {
-
-                Address = new Address()
-                {
-                    City = "Pune",
-                    Country = "India",
-                    State = "Maharashtra",
-                    Taluka = "Dhanori",
-                    Village = "Dhanori Gaon",
-                    Zip = "222132"
-                },
-                FirstName = "Mahadev ",
-                LastName = "sharma",
-                Id = 23,
-                AlternetContact = "352424252363",
-                Contact = "32645237452374",
-                Enabled = false,
-                Gender = "Female"
-            };
-            return user;
+            var usersDeatils = ConsumeApiService.ConsumeApi<ApiResponse<Users>>(HttpMethod.Get, "/GetUsersById?id=" + name, null);
+            return usersDeatils.Data;
         }
-
         public bool UpdateUser(Users user, int id)
         {
+            var usersDeatils = ConsumeApiService.ConsumeApi<ApiResponse<Users>>(HttpMethod.Post, "/GetUsersById?id=" + id, user);
             return true;
+        }
+        public IList<StateDetails> GetStateDetails(int countryId)
+        {
+            var states = ConsumeApiService.ConsumeApi<ApiResponse<IList<StateDetails>>>(HttpMethod.Get, "/GetStateDetails?countryId=" + countryId, null);
+            return states.Data;
+        }
+        public IList<DivisionDetails> GetDivisionDetails(int stateId)
+        {
+            var states = ConsumeApiService.ConsumeApi<ApiResponse<IList<DivisionDetails>>>(HttpMethod.Get, "/GetDivisionDetails?stateId=" + stateId, null);
+
+            return states.Data;
+        }
+        public IList<TalukaDetails> GetTalukaDetails(int divisionId)
+        {
+            var taluka = ConsumeApiService.ConsumeApi<ApiResponse<IList<TalukaDetails>>>(HttpMethod.Get, "/GetTalukaDetails?divisionId=" + divisionId, null);
+
+            return taluka.Data;
         }
         public string GetApiUrl()
         {
             return _configuration.GetSection("ConnectionStrings").GetSection("ProductContext").Value;
-        }
-
-        public IList<StateDetails> GetStateDetails(int countryId)
-        {
-            List<StateDetails> stateDetails = new List<StateDetails>()
-            {
-                new StateDetails() { StateId= 1, Name = "India"},
-                new StateDetails() { StateId= 2, Name = "Pakistan"},
-                new StateDetails() { StateId= 3, Name = "Australia"},
-                new StateDetails() { StateId= 4, Name = "South Africa"}
-            };
-            return stateDetails;
-        }
-
-        public IList<DivisionDetails> GetDivisionDetails(int stateId)
-        {
-            List<DivisionDetails> division = new List<DivisionDetails>()
-            {
-                new DivisionDetails() {  DivisionId = 11, Name = "India DivisionId"},
-                new DivisionDetails() { DivisionId = 12, Name = "Pakistan DivisionId"},
-                new DivisionDetails() { DivisionId = 13, Name = "Australia DivisionId"},
-                new DivisionDetails() { DivisionId =14, Name = "South Africa DivisionId"}
-            };
-            return division;
-        }
-
-        public IList<TalukaDetails> GetTalukaDetails(int divisionId)
-        {
-            List<TalukaDetails> taluka = new List<TalukaDetails>()
-            {
-                new TalukaDetails() { TalukaId = 21, Name = "India TalukaId"},
-                new TalukaDetails() { TalukaId = 22, Name = "Pakistan TalukaId"},
-                new TalukaDetails() { TalukaId = 23, Name = "Australia TalukaId"},
-                new TalukaDetails() { TalukaId = 24, Name = "South Africa TalukaId"}
-            };
-            return taluka;
         }
     }
 }
