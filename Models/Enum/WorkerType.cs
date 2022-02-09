@@ -8,5 +8,10 @@ namespace Models.Enum
     {
         Mistri = 0,
         Helper = 1
-    }  
+    }
+    public enum GenderType
+    {
+        Male = 0,
+        Female = 1
+    }
 }

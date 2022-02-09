@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.Enum;
 using System;
-
+using System.Globalization;
 
 namespace KarigariUI.Controllers
 {
@@ -32,7 +33,17 @@ namespace KarigariUI.Controllers
         // GET: UserController/Create
         public ActionResult Create()
         {
-            return View();
+            Users user = new Users()
+            {
+                Address = new Address()
+                {
+                    Country = new System.Collections.Generic.List<CountryDetails>() { new CountryDetails() { CountryId = 1, Name = "India" } },
+                    State = new System.Collections.Generic.List<StateDetails>(),
+                    City = new System.Collections.Generic.List<DivisionDetails>(),
+                    Taluka = new System.Collections.Generic.List<TalukaDetails>()
+                }
+            };
+            return View(user);
         }
 
         // POST: UserController/Create
@@ -42,8 +53,8 @@ namespace KarigariUI.Controllers
         {
             try
             {
-                //GetFormData(collection);
-                // _userDomain.AddUser(user);
+                UsersRequestInput usersRequestInput = GetFormData(collection);
+                _userDomain.AddUser(usersRequestInput);
                 return RedirectToAction(nameof(Create));
             }
             catch
@@ -51,7 +62,7 @@ namespace KarigariUI.Controllers
                 return View();
             }
         }
-        // GET: UserController/Edit/5
+        // GET: UserController/Edit/5 
         public ActionResult Edit(int id)
         {
             return View(_userDomain.GetUserById(id));
@@ -76,10 +87,28 @@ namespace KarigariUI.Controllers
 
 
 
-        private Users GetFormData(IFormCollection collection)
+        private UsersRequestInput GetFormData(IFormCollection collection)
         {
-
-            var users = new Users() { DeviceID = 222 };
+            CultureInfo culture = new CultureInfo("en-US");
+            var users = new UsersRequestInput()
+            {
+                FirstName = collection["FirstName"].ToString(),
+                LastName = collection["LastName"].ToString(),
+                Contact = collection["Contact"].ToString(),
+                Gender = collection["Gender"].ToString(),
+                DateOfBirth = Convert.ToDateTime(collection["DateOfBirth"].ToString(), culture),
+                WorkerType = collection["WorkerType"].ToString(),
+                Password = collection["Password"].ToString(),
+                Address = new AddressRequest()
+                {
+                    Country = Convert.ToInt32(collection["Address.Country"]),
+                    State = Convert.ToInt32(collection["Address.State"]),
+                    City = Convert.ToInt32(collection["Address.City"]),
+                    Taluka = Convert.ToInt32(collection["Address.Taluka"]),
+                    Village = collection["Address.Village"].ToString(),
+                    Zip = collection["Address.Zip"].ToString()
+                }
+            };
             return users;
         }
 

@@ -1,189 +1,187 @@
-﻿@model Models.Users
+﻿@using Models
+@using Models.Enum
+@model Models.Users
 
 @{
     ViewData["Title"] = "Create";
 }
-<div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                <div class="card" style="border-radius: 15px;margin-top: 20%;">
-                    <div class="row ml-4 mt-3">
-                        <div class="col-sm-8">
-                            <h2>Sign Up</h2>
-                        </div>
-                    </div>
+@using (Html.BeginForm())
+{
+    <form asp-action="Create" id="form1">
 
-                    <div class="row ml-4 mt-3">
-                        <div class="col-sm-8">
-                          <p>Please fill in this form to create an account!</p>
-                        </div>
-                    </div>
-                   
-                  <hr>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <form asp-action="Create" id="form1">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="input-group mb-3">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-aa3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;margin-top: 20%;">
+                            <div class="row ml-4 mt-3">
+                                <div class="col-sm-8">
+                                    <h2>Sign Up</h2>
                                 </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="FirstName" id="FirstName" name="FirstName">
-                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="row ml-4 mt-3">
+                                <div class="col-sm-8">
+                                    <p>Please fill in this form to create an account!</p>
                                 </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Last Name" id="LastName" name="LastName">
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    @*<form asp-action="Create" id="form1">*@
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="input-group mb-3">
+                                    </div>
+                                    <div class="form-group input-group mb-3">
+                                        @Html.TextBoxFor(x=>x.FirstName, new { placeholder = "First Name", @class = "form-control" } )
+                                    </div>
+                                    <div class="form-group input-group mb-3">
+                                        @Html.TextBoxFor(x=>x.LastName, new { placeholder = "Last Name", @class = "form-control" } )
+                                    </div>
+                                    <div class="form-group input-group mb-3">
+                                        @Html.TextBoxFor(x=>x.Contact, new { placeholder = "Contact Details", @class = "form-control" } )
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(m => m.Gender, new SelectList(Enum.GetValues(typeof(GenderType))), new { @class = "form-select input-group mb-3 form-control" })
+                                    </div>
+                                    <div class="form-group input-group mb-3">
+                                        <input class="form-control" placeholder="Select Birth Date" type="text" id="DateOfBirth" name="DateOfBirth" />
+                                    </div>
+                                    <div class="form-group ">
+                                        @Html.DropDownListFor(m => m.WorkerType, new SelectList(Enum.GetValues(typeof(WorkerType))), new { @class = "form-select input-group mb-3 form-control" })
+
+                                    </div>
+                                    <div class="form-group input-group mb-3">
+                                        @Html.PasswordFor(x=>x.Password, new { placeholder = "Password",  @class = "form-control" } )
+                                    </div>
+                                    <div class="form-group input-group mb-3">
+                                        @*@Html.TextBoxFor(x=>x.Contact, new { placeholder = "Contact Details", @class = "form-control" } )*@
+                                        <input type="text" class="form-control" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false" placeholder="Address" id="Address" name="Message" readonly>
+                                        <span asp-validation-for="Message" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3" style="display: flex; justify-content: center;">
+                                        <button id="CreateUser" type="submit" name="submit" formmethod="post" class="btn btn-primary">Create User</button>
+                                    </div>
+                                    @*</form>*@
                                 </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Contact details " id="Contact" name="Contact">
-                                    <span asp-validation-for="Contact" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                <select asp-for="Gender" class="form-select input-group mb-3" aria-label="Default select example">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select></div>
-                                <div class="form-group input-group mb-3">
-                                    <input class="form-control" placeholder="Select Birth Date" type="text" id="DateOfBirth" name="DateOfBirth" />
-                                </div>
-                                <div class="form-group ">
-                                    <select class="form-select input-group mb-3 form-control" aria-label="Default WorkerType example">
-                                        <option value="Mistris">Mistri</option>
-                                        <option value="Labours">Labour</option>
-                                    </select> <span asp-validation-for="WorkerType" class="text-danger"></span>
-                                </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Password " id="Password" name="Password">
-                                    <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                                <div class="form-group input-group mb-3">
-                                    <input type="text" class="form-control" data-toggle="modal" data-target="#exampleModal" data-backdrop="static" data-keyboard="false" placeholder="Address" id="Address" name="Message" readonly>
-                                    <span asp-validation-for="Message" class="text-danger"></span>
-                                </div>
-                                <div class="form-group mb-3" style="display: flex; justify-content: center;">
-                                    <button id="CreateUser" type="submit" name="submit" formmethod="post" class="btn btn-primary">Create User</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog"  style="margin-top: 6%;" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Address Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="row mt-3">
-                        <div class="col-sm-2">
-                            <label class="control-label float-right">Country</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <!-- country select -->
-                            <div class="control-group">
-                                <div class="controls">
-                                    <select id="country" name="country" class="input-xlarge w-100">
-                                        <option value="" selected="selected">Select a Country</option>
-                                        <option value="IN">India</option>
-                                    </select>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="margin-top: 6%;" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Address Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="row mt-3">
+                                <div class="col-sm-2">
+                                    <label class="control-label float-right">Country</label>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-2">
-                            <label class="control-label float-right">State</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <!-- State select -->
-                            <div class="control-group">
-                                <div class="controls">
-                                    <select id="State" name="State" class="input-xlarge w-100" disabled>
-                                        <option value="" selected="selected">Select a State</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-2">
-                            <label class="control-label float-right">City</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <!-- city select -->
-                            <div class="control-group">
-                                <div class="controls">
-                                    <select id="city" name="city" class="input-xlarge w-100" disabled>
-                                        <option value="" selected="selected">Select a City</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-2">
-                            <label class="control-label float-right">Taluka</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <!-- Taluka select -->
-                            <div class="form-group">
-                                <div class="controls">
-                                    <select id="taluka" name="taluka" class="input-xlarge w-100" disabled>
-                                        <option value="" selected="selected"> Select a Taluka</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-2">
-                            <label class="control-label float-right" style="margin-left: 15px;">Land Mark:</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="form-group">
-                                <textarea class="form-control w-100" id="landMark"></textarea>
-                                <p class="help-block">Street address, P.O. box, company name, c/o</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-2">
-                            <label class="control-label float-right" style="margin-left: 15px;"> Zip / Postal Code</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <!-- postal-code input-->
-                            <div class="control-group">
-                                <div class="controls">
-                                    <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code" class="w-100 input-xlarge">
-                                    <p class="help-block"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="col-sm-8">
+                                    <!-- country select -->
+                                <div class="control-group">
+                                        <div class="controls">
 
-                </form>
-            </div>
-            <div class="modal-footer" style="justify-content: center;">
-                <button type="button"  id="saveAddress" class="btn btn-primary">Save Address</button>
+                                            @Html.DropDownListFor(m => m.Address.Country, new SelectList(Model.Address.Country,"CountryId","Name"),"Select a Country", new { @class = "input-xlarge w-100" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-2">
+                                    <label class="control-label float-right">State</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <!-- State select -->
+                                <div class="control-group">
+                                        <div class="controls">
+                                            @Html.DropDownListFor(m => m.Address.State, new SelectList(Model.Address.State,"StateId","Name"),"Select a State", new { @class = "input-xlarge w-100" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-2">
+                                    <label class="control-label float-right">City</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <!-- city select -->
+                                <div class="control-group">
+                                        <div class="controls">
+                                            @Html.DropDownListFor(m => m.Address.City, new SelectList(Model.Address.City,"DivisionId","Name"),"Select a City", new { @class = "input-xlarge w-100" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-2">
+                                    <label class="control-label float-right">Taluka</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <!-- Taluka select -->
+                                <div class="form-group">
+                                        <div class="controls">
+                                            @Html.DropDownListFor(m => m.Address.Taluka, new SelectList(Model.Address.Taluka,"TalukaId","Name"),"Select a Taluka", new { @class = "input-xlarge w-100" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-2">
+                                    <label class="control-label float-right" style="margin-left: 15px;">Land Mark:</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(x=>x.Address.Village, new { placeholder = "Villege Details", @class = "form-control w-100" } )
+                                        <p class="help-block">Street address, P.O. box, company name, c/o</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-2">
+                                    <label class="control-label float-right" style="margin-left: 15px;"> Zip / Postal Code</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <!-- postal-code input-->
+                                <div class="control-group">
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x=>x.Address.Zip, new { placeholder = "zip or postal code", @class = "w-100 input-xlarge" } )
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="justify-content: center;">
+                        <button data-dismiss="modal" id="saveAddress" class="btn btn-default" type="button">Cancel</button>
+                        @*<button type="button" id="saveAddress" class="btn btn-primary">Save Address</button>*@
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </form>
+}
 <style type="text/css">
     .mb-3 {
         margin-left: 20%;
     }
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-   <script src="~/js/user/CreateUser.js" asp-append-version="true"></script>
+<script src="~/js/user/CreateUser.js" asp-append-version="true"></script>

@@ -28,4 +28,10 @@ namespace Models
         public bool Enabled { get; set; }
 
     }
+
+    public class UsersRequestInput: Users
+    {
+        public AddressRequest Address { get; set; }
+        public string WorkerType { get; set; }
+    }
 }
