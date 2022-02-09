@@ -18,19 +18,11 @@ namespace KarigariUI.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            _userDomain.GetAllUser();
+          //DashBoard page
             return View();
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
-        {
-            var ss = _userDomain.GetAllUser();
-            return View(_userDomain.GetUserById(id));
-        }
-
         [HttpGet]
-        // GET: UserController/Create
         public ActionResult Create()
         {
             Users user = new Users()
@@ -46,9 +38,7 @@ namespace KarigariUI.Controllers
             return View(user);
         }
 
-        // POST: UserController/Create
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -62,15 +52,20 @@ namespace KarigariUI.Controllers
                 return View();
             }
         }
-        // GET: UserController/Edit/5 
-        public ActionResult Edit(int id)
+
+        [HttpGet]
+        public ActionResult Details(int id)
         {
             return View(_userDomain.GetUserById(id));
         }
 
-        // POST: UserController/Edit/5
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View(_userDomain.GetUserById(id));
+        }
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Users user)
         {
             try
@@ -83,6 +78,46 @@ namespace KarigariUI.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult CreateJobProfile(int id)
+        {
+            return View(_userDomain.GetUserById(id));
+        }
+
+        [HttpPost]
+        public ActionResult CreateJobProfile(int id, Users user)
+        {
+            try
+            {
+                _userDomain.UpdateUser(user, id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
+        [HttpGet]
+        public ActionResult SearchJob()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchJob(string Needtoaddmodel)
+        {
+            //return report view
+            return View();
+        }
+
+
+
+
+
 
 
 
@@ -111,11 +146,6 @@ namespace KarigariUI.Controllers
             };
             return users;
         }
-
-
-
-
-
 
         [HttpPost]
         public JsonResult GetStateDetails(int countryId)
